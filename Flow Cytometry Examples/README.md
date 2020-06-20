@@ -29,7 +29,7 @@ Growth Conditions:
 
 - Inverters were allowed to grow until 8AM the following morning, when they were diluted into PBS (1/100X dilution) and run through the flow cytometer. 
  
-## Example TASBE Analyses
+## Example Analyses
 
 Example analyses were prepared using Matlab and TASBE Flow Analytics 8.3.2.
 
