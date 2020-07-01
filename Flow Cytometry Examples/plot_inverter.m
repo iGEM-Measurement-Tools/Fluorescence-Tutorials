@@ -20,8 +20,8 @@ h = figure('PaperPosition',[1 1 5 5]);
 loglog(ZeroOnLog_Ara_uM, GFP_means,'-'); hold on;
 LU = geo_error_bars(GFP_means',GFP_stds');
 errorbar(ZeroOnLog_Ara_uM, GFP_means, LU(1,:), LU(2,:));
-ZeroOnLog(ZeroOnLog_Ara_uM(end),0.03);
 xlim([0.007, 2e3]); ylim([3e2 2e5]);
+ZeroOnLog(ZeroOnLog_Ara_uM(end),0.03);
 xlabel('L-arabinose (uM)');
 ylabel('GFP (MEFL)');
 title('pBAD induction');
@@ -37,3 +37,34 @@ xlim([1e3 1e5]); ylim([2e1 3e3]);
 ylabel('Output (MEFL)');
 title('TetR inverter');
 outputfig(h,'TetR_inverter','plots');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compute and plot SNR
+h = figure('PaperPosition',[1 1 6 4]);
+semilogx(results{1}.bincenters,results{1}.bincounts(:,1)./max(results{1}.bincounts(:,1)),'r-'); hold on;
+semilogx(results{end}.bincenters,results{end}.bincounts(:,1)./max(results{end}.bincounts(:,1)),'b-');
+autofluorescence_boundary = 2*getStdERF(get_autofluorescence_model(CM,1));
+plot([autofluorescence_boundary autofluorescence_boundary],[0 2],'k--');
+legend('Ara High','Ara Low','AF Limit');
+xlim([1e2 1e6]); ylim([0 1.1]);
+xlabel('GFP (MEFL)'); ylabel('Normalized Density');
+title('pBAD induction plus/minus');
+outputfig(h','pBAD_induction_plusminus','plots');
+
+pBAD_SNR = SNR(results{1}.means(1),results{end}.means(1),results{1}.stds(1),results{end}.stds(1))
+%    5.7252 dB
+
+h = figure('PaperPosition',[1 1 6 4]);
+semilogx(results{1}.bincenters,results{1}.bincounts(:,2)./max(results{1}.bincounts(:,2)),'r-'); hold on;
+semilogx(results{end}.bincenters,results{end}.bincounts(:,2)./max(results{end}.bincounts(:,2)),'b-');
+autofluorescence_boundary = 2*getStdERF(get_autofluorescence_model(CM,2));
+plot([autofluorescence_boundary autofluorescence_boundary],[0 2],'k--');
+legend('Location','NorthWest','TetR High','TetR Low','AF Limit');
+xlim([1e0 1e4]); ylim([0 1.1]);
+xlabel('RFP (MEFL)'); ylabel('Normalized Density');
+title('TetR inverter plus/minus');
+outputfig(h','TetR_induction_plusminus','plots');
+
+TetR_SNR = SNR(results{1}.means(2),results{end}.means(2),results{1}.stds(2),results{end}.stds(2))
+%    -0.0132 dB
+
