@@ -68,3 +68,27 @@ outputfig(h','TetR_induction_plusminus','plots');
 TetR_SNR = SNR(results{1}.means(2),results{end}.means(2),results{1}.stds(2),results{end}.stds(2))
 %    -0.0132 dB
 
+%%%%%%%%%%%%%%%%%%%%
+% Example of geometric vs. arithmetic statistics
+arithmetic_mean = wmean(results{1}.bincenters,results{1}.bincounts(:,2)');
+arithmetic_std = wstd(results{1}.bincenters,results{1}.bincounts(:,2)');
+geometric_mean = geomean(results{1}.bincenters,results{1}.bincounts(:,2)');
+geometric_std = geostd(results{1}.bincenters,results{1}.bincounts(:,2)');
+
+% compute distribution functions
+arithmetic_distribution = gmdistribution(arithmetic_mean,arithmetic_std^2,1);
+% Note: gmdistribution's second argument is variance (i.e., std.dev.^2)
+geometric_distribution = gmdistribution(log10(geometric_mean),log10(geometric_std)^2,1);
+arithmetic_pdf = pdf(arithmetic_distribution,results{1}.bincenters');
+geometric_pdf = pdf(geometric_distribution,log10(results{1}.bincenters'));
+
+h = figure('PaperPosition',[1 1 6 4]);
+semilogx(results{1}.bincenters,results{1}.bincounts(:,2)./max(results{1}.bincounts(:,2)),'k-'); hold on;
+plot(results{1}.bincenters,geometric_pdf./max(geometric_pdf),'b--');
+plot(results{1}.bincenters,arithmetic_pdf./max(arithmetic_pdf),'r--');
+legend('TetR High','Geometric Fit','Arithmetic Fit');
+xlim([1e0 1e4]); ylim([0 1.1]);
+xlabel('RFP (MEFL)'); ylabel('Normalized Density');
+title('TetR statistics comparison');
+outputfig(h','statistics_comparison_TetR','plots');
+
