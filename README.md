@@ -29,5 +29,6 @@ Plate reader example data is drawn from the iGEM 2018 interlaboratory study, and
 - Jacob Beal, Natalie G. Farny, Traci Haddock-Angelli, Vinoo Selvarajah, Geoff S. Baldwin, Russell Buckley-Taylor, Markus Gershater, Daisuke Kiga, John Marken, Vishal Sanchania, Abigail Sison, Christopher T. Workman, and the iGEM Interlab Study Contributors. "Robust Estimation of Bacterial Cell Count from Optical Density,"
 bioRxiv preprint, October 2019. https://doi.org/10.1101/803239
 
-Flow cytometry data is contributed by Swati Banerjee Carr, from preliminary work for the following publication:
+Flow cytometry data is contributed by Swati Banerjee Carr, from preliminary work for the following publications:
+- Swati Banerjee Carr, "Reliable Gene Expression and Assembly for Synthetic Biological Devices in E. Coli Through Customized Promoter Insulator Elements and Automated DNA Assembly." Ph.D. Thesis, Boston University, July, 2016.
 - Swati Banerjee Carr, Jacob Beal, and Douglas M. Densmore. "Reducing DNA context dependence in bacterial promoters", PLoS ONE 12(4): e0176013, April 2017.
